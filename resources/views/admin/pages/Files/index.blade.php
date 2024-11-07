@@ -30,7 +30,6 @@
                         </td>
                         <td>
                             <a href="{{ route('file.edit', $file->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="{{ route('file.show', $file->id) }}" class="btn btn-warning btn-sm">Show</a>
 
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"

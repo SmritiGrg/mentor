@@ -26,8 +26,7 @@ class FileController extends Controller
      */
     public function create()
     {
-        $files = File::all();
-        return view('admin.pages.Files.create', compact('files'));
+        return view('admin.pages.Files.create');
     }
 
     /**
@@ -97,6 +96,9 @@ class FileController extends Controller
         $file = File::query()->where('id', $id)->get()->first();
         Files::delete(public_path('uploads/' . $file->image));
         $file->delete();
-        return redirect('admin/pages/files')->with('message', 'Deleted Successfully');
+        return redirect('admin/file')->with('message', 'Deleted Successfully');
     }
 }
+
+
+

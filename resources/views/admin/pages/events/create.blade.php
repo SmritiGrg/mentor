@@ -4,16 +4,16 @@
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center"
                 style="background-color: rgb(213, 203, 203)">
-                <h5 class="mb-0">Create Trainer</h5>
+                <h5 class="mb-0">Create Event</h5>
             </div>
             <div class="card-body">
-                <form enctype="multipart/form-data" method="post" action="{{ route('trainer.store') }}">
+                <form enctype="multipart/form-data" method="post" action="{{ route('event.store') }}">
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label" for="basic-icon-default-fullname">Name</label>
+                        <label class="form-label" for="basic-icon-default-fullname">Topic</label>
                         <div class="input-group input-group-merge">
-                            <input type="text" class="form-control" id="basic-icon-default-fullname" placeholder="Title"
-                                aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" name="name" />
+                            <input type="text" class="form-control" id="basic-icon-default-fullname" placeholder="Topic"
+                                aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" name="topic" />
                         </div>
                     </div>
                     <div class="mb-3">
@@ -91,9 +91,8 @@
 
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Description"
-                            name="description"></textarea>
+                        <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Content" name="content"></textarea>
                     </div>
                     <button type="reset" class="btn btn-primary">Reset</button>
                     <button type="submit" class="btn btn-primary">Submit</button>

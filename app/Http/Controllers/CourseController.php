@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\CourseCategory;
+use App\Models\File;
+use App\Models\Trainer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -13,7 +15,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.course.index');
+        $courses = Course::with(['category', 'trainers'])->get();
+        return view('admin.pages.course.index', compact('courses'));
     }
 
     /**
@@ -21,7 +24,10 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.course.create');
+        $categories = CourseCategory::all();
+        $trainers = Trainer::all();
+        $files = File::all();
+        return view('admin.pages.course.create', compact('categories', 'files', 'trainers'));
     }
 
     /**
@@ -29,7 +35,23 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+
+        $course = new Course();
+        $request->validate([
+            'image' => 'required|string',
+            'name' => 'required|max:100',
+            'description' => 'required',
+            'price' => 'required',
+            'category_id' => 'required|exists:course_categories,id', // Ensure category exists
+            'trainer_id' => 'required|exists:trainers,id'
+        ]);
+        $course->name = $request->name;
+        $course->description = $request->description;
+        $course->price = $request->price;
+        $course->image = $request->image;
+        $course->save();
+        return redirect('/admin/course')->with('message', 'uploaded Succesfully');
     }
 
     /**
@@ -59,8 +81,10 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course)
+    public function destroy($id)
     {
-        //
+        $course = Course::query()->where('id', $id)->get()->first();
+        $course->delete();
+        return redirect('admin/course')->with('message', 'Deleted Successfully');
     }
 }

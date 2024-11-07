@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\CourseCategoryController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\EventsController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainerController;
-use App\Models\CourseCategory;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -45,8 +46,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     });
     Route::resource('/course', CourseController::class);
     Route::resource('/file', FileController::class);
-    Route::resource('/courseCategory', CourseCategory::class);
+    Route::resource('/courseCategory', CourseCategoryController::class);
     Route::resource('/trainer', TrainerController::class);
+    Route::resource('/event', EventsController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

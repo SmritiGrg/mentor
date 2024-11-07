@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description');
             $table->string('image');
+            $table->string('price');
             $table->foreignId('category_id')->nullable();
             $table->foreignId('trainer_id')->nullable();
             $table->foreign('category_id')->references('id')->on('course_categories')->onDelete('cascade');

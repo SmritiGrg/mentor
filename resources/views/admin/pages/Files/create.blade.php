@@ -12,9 +12,8 @@
                     <div class="mb-3">
                         <label class="form-label" for="basic-icon-default-fullname">Title</label>
                         <div class="input-group input-group-merge">
-                            <input type="text" class="form-control" id="basic-icon-default-fullname"
-                                placeholder="Title" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2"
-                                name="title" />
+                            <input type="text" class="form-control" id="basic-icon-default-fullname" placeholder="Title"
+                                aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" name="title" />
                         </div>
                     </div>
                     <div class="mb-3">
@@ -31,7 +30,7 @@
                                     class="bx bx-buildings"></i></span>
                             <input type="file" id="basic-icon-default-company" class="form-control"
                                 placeholder="ACME Inc." aria-label="ACME Inc."
-                                aria-describedby="basic-icon-default-company2" name="image" /> 
+                                aria-describedby="basic-icon-default-company2" name="image" />
                         </div>
                     </div>
                     <button type="reset" class="btn btn-primary">Reset</button>
