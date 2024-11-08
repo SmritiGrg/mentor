@@ -27,7 +27,8 @@
                         </div>
                         <!-- image box where image from model come -->
                         <div class="input-group mb-3 col-12">
-                            <input id="imagebox" type="text" class="form-control" disabled name="image" readonly>
+                            <input id="imagebox" type="text" class="form-control" name="image" readonly
+                                value="{{ $trainer->image }}">
                             <!-- img come above ☝ -->
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"

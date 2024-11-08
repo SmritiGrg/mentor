@@ -65,9 +65,10 @@ class TrainerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
         $trainer = Trainer::query()->where('id', $id)->get()->first();
         $request->validate([
-            'image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+            'image' => 'required|string',
             'name' => 'required|max:100',
             'description' => 'required'
         ]);

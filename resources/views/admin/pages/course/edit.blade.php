@@ -1,5 +1,14 @@
 @extends('admin.inc.main')
 @section('container')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="container mt-3">
         <a href="{{ route('course.index') }}" class="btn btn-primary my-3">Back</a>
         <div class="card mb-4">
@@ -16,7 +25,7 @@
                         <div class="input-group input-group-merge">
                             <input type="text" class="form-control" id="basic-icon-default-fullname"
                                 placeholder="John Doe" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2"
-                                name="title" value="{{ $course->name }}" required />
+                                name="name" value="{{ $course->name }}" required />
                         </div>
                     </div>
                     <div class="mb-3">
@@ -39,7 +48,8 @@
                         </div>
                         <!-- image box where image from model come -->
                         <div class="input-group mb-3 col-12">
-                            <input id="imagebox" type="text" class="form-control" disabled name="image" readonly>
+                            <input id="imagebox" type="text" class="form-control" name="image" readonly
+                                value="{{ $course->image }}">
                             <!-- img come above ☝ -->
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
@@ -99,7 +109,7 @@
                                 const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
 
                                 function firstFunction() {
-                                    var x = document.querySelector('input[name=img]:checked').value;
+                                    var x = document.querySelector('input[name=image]:checked').value;
                                     document.getElementById('imagebox').value = x; // use .innerHTML if we want data on label
                                 }
                             </script>
@@ -109,6 +119,31 @@
                                 height="100px">
                         </a>
                     </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" name="category_id" id="category" required>
+                            <option value="" disabled>Select Category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}"
+                                    {{ $course->category_id == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="trainer" class="form-label">Trainer</label>
+                        <select class="form-select" name="trainer_id" id="trainer" required>
+                            <option value="" disabled>Select Trainer</option>
+                            @foreach ($trainers as $trainer)
+                                <option value="{{ $trainer->id }}"
+                                    {{ $course->trainer_id == $trainer->id ? 'selected' : '' }}>
+                                    {{ $trainer->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     {{-- <button type="reset" class="btn btn-primary">Reset</button> --}}
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
