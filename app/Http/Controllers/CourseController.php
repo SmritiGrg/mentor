@@ -15,7 +15,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::with(['category', 'trainers'])->get();
+        $courses = Course::select('courses.*', 'course_categories.name as category_name', 'trainers.name as trainer_name')->join('course_categories', 'courses.category_id', '=', 'course_categories.id')->join('trainers', 'courses.trainer_id', '=', 'trainers.id')->with(['category', 'trainers'])->get();
         return view('admin.pages.course.index', compact('courses'));
     }
 
@@ -43,13 +43,15 @@ class CourseController extends Controller
             'name' => 'required|max:100',
             'description' => 'required',
             'price' => 'required',
-            'category_id' => 'required|exists:course_categories,id', // Ensure category exists
-            'trainer_id' => 'required|exists:trainers,id'
+            'category_id' => 'required', // Ensure category exists
+            'trainer_id' => 'required'
         ]);
         $course->name = $request->name;
         $course->description = $request->description;
         $course->price = $request->price;
         $course->image = $request->image;
+        $course->category_id = $request->category_id;
+        $course->trainer_id = $request->trainer_id;
         $course->save();
         return redirect('/admin/course')->with('message', 'uploaded Succesfully');
     }
@@ -57,25 +59,40 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Course $course)
+    public function show($id)
     {
-        //
+        $course = Course::query()->where('id', $id)->get()->first();
+        return view('admin.pages.Course.view', compact('course'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Course $course)
+    public function edit($id)
     {
-        //
+        $files = File::all();
+        $course = Course::query()->where('id', $id)->get()->first();
+        return view('admin.pages.Course.edit', compact('course', 'files'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, $id)
     {
-        //
+        $course = Course::query()->where('id', $id)->get()->first();
+        $request->validate([
+            'image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
+            'name' => 'required|max:100',
+            'description' => 'required',
+            'price' => 'required'
+        ]);
+        $course->name = $request->name;
+        $course->image = $request->image;
+        $course->description = $request->description;
+        $course->price = $request->price;
+        $course->update();
+        return redirect('/admin/trainer')->with('message', 'Updated Succesfully');
     }
 
     /**

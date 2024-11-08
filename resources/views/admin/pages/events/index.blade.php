@@ -7,31 +7,31 @@
         </div>
     @endif
     <div class="container py-4">
-        <a href="{{ route('trainer.create') }}" class="btn btn-primary my-3">Add</a>
+        <a href="{{ route('event.create') }}" class="btn btn-primary my-3">Add</a>
         <table class="table table-secondary 
          table-hover table-bordered table-sm table-responsive-sm">
             <thead>
                 <tr>
                     <th scope="col">S.N</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Topic</th>
                     <th scope="col">Image</th>
-                    <th scope="col">Description</th>
+                    <th scope="col">Content</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($trainers as $trainer)
+                @foreach ($events as $event)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $trainer->name }}</td>
-                        <td><a target="_blank" href="{{ asset('uploads/' . $trainer->image) }}">
-                                <img src="{{ asset('uploads/' . $trainer->image) }}" alt="" width="100px"
+                        <td>{{ $event->topic }}</td>
+                        <td><a target="_blank" href="{{ asset('uploads/' . $event->image) }}">
+                                <img src="{{ asset('uploads/' . $event->image) }}" alt="" width="100px"
                                     height="100px">
                             </a>
                         </td>
-                        <td>{{ $trainer->description }}</td>
+                        <td>{{ $event->content }}</td>
                         <td>
-                            <a href="{{ route('trainer.edit', $trainer->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="{{ route('event.edit', $event->id) }}" class="btn btn-primary btn-sm">Edit</a>
 
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
@@ -55,7 +55,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <form action="{{ route('trainer.destroy', $trainer->id) }}" method="POST"
+                                            <form action="{{ route('event.destroy', $event->id) }}" method="POST"
                                                 enctype="multipart/form-data">
                                                 @csrf
                                                 @method('DELETE')

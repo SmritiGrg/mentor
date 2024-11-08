@@ -32,12 +32,12 @@
                                 <img src="{{ asset('uploads/' . $course->image) }}" alt="" width="100px"
                                     height="100px">
                             </a></td>
-                        <td>{{ $course->price }}</td>
-                        <td>{{ $course->categories->name }}</td>
-                        <td>{{ $course->trainers->name }}</td>
+                        <td>Rs.{{ $course->price }}</td>
+                        <td>{{ $course->category_name }}</td>
+                        <td>{{ $course->trainer_name }}</td>
                         <td>
                             <a href="{{ route('course.edit', $course->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="" class="btn btn-warning btn-sm">Show</a>
+                            <a href="{{ route('course.show', $course->id) }}" class="btn btn-warning btn-sm">Show</a>
 
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"

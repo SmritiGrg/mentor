@@ -137,12 +137,12 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="{{route('trainer.create')}}" class="menu-link">
+                                <a href="{{ route('trainer.create') }}" class="menu-link">
                                     <div data-i18n="Account">Create</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="{{route('trainer.index')}}" class="menu-link">
+                                <a href="{{ route('trainer.index') }}" class="menu-link">
                                     <div data-i18n="Notifications">Index</div>
                                 </a>
                             </li>
@@ -175,12 +175,12 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="pages-misc-error.html" class="menu-link">
+                                <a href="{{ route('event.create') }}" class="menu-link">
                                     <div data-i18n="Create">Create</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="pages-misc-under-maintenance.html" class="menu-link">
+                                <a href="{{ route('event.index') }}" class="menu-link">
                                     <div data-i18n="Index">Index</div>
                                 </a>
                             </li>

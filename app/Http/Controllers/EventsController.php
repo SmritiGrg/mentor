@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Events;
+use App\Models\File;
 use Illuminate\Http\Request;
 
 class EventsController extends Controller
@@ -12,7 +13,8 @@ class EventsController extends Controller
      */
     public function index()
     {
-        //
+        $events = Events::all();
+        return view('admin.pages.events.index', compact('events'));
     }
 
     /**
@@ -20,7 +22,8 @@ class EventsController extends Controller
      */
     public function create()
     {
-        //
+        $files = File::all();
+        return view('admin.pages.events.create', compact('files'));
     }
 
     /**
@@ -28,7 +31,18 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $event = new Events();
+        $request->validate([
+            'image' => 'required|string',
+            'topic' => 'required|max:100',
+            'content' => 'required'
+        ]);
+        $event->topic = $request->topic;
+        $event->image = $request->image;
+        $event->content = $request->content;
+        $event->save();
+        return redirect('/admin/event')->with('message', 'uploaded Succesfully');
     }
 
     /**

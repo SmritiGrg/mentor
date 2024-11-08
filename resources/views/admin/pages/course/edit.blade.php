@@ -1,6 +1,7 @@
 @extends('admin.inc.main')
 @section('container')
     <div class="container mt-3">
+        <a href="{{ route('course.index') }}" class="btn btn-primary my-3">Back</a>
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center"
                 style="background-color: rgb(213, 203, 203)">
@@ -21,7 +22,7 @@
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Description</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Description"
-                            name="description" value="{{ $course->description }}"></textarea>
+                            name="description">{{ $course->description }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="basic-icon-default-fullname">Price</label>
@@ -103,7 +104,10 @@
                                 }
                             </script>
                         </div>
-
+                        <a target="_blank" href="{{ asset('uploads/' . $course->image) }}">
+                            <img src="{{ asset('uploads/' . $course->image) }}" alt="" width="100px"
+                                height="100px">
+                        </a>
                     </div>
                     {{-- <button type="reset" class="btn btn-primary">Reset</button> --}}
                     <button type="submit" class="btn btn-primary">Update</button>
